@@ -1,0 +1,63 @@
+{
+  "site": {
+    "host": "https://example.com",
+    "reachable": true,
+    "encoding": "utf-8",
+    "redirect": "",
+    "anti_bot": false,
+    "observed_at": "2026-09-07"
+  },
+  "mode": {
+    "runtime": "t4",
+    "content_type": "video",
+    "cms": "maccms_v8",
+    "confidence": "medium"
+  },
+  "routes": {
+    "home": "/",
+    "category": "/search.php?searchtype=5&tid={tid}&page={pg}",
+    "detail": "/movie/index{id}.html",
+    "search": "/search.php",
+    "play": "/play/{id}-{sid}-{nid}.html"
+  },
+  "selectors": {
+    "nav": [
+      "//a[contains(@class,'nav')]"
+    ],
+    "list": [
+      "//a[contains(@class,'videopic')]"
+    ],
+    "title": [],
+    "pic": [],
+    "detail": {},
+    "sources": [],
+    "episodes": []
+  },
+  "api": {
+    "enabled": false,
+    "endpoints": {},
+    "method": "GET",
+    "token": false,
+    "encrypted": false
+  },
+  "player": {
+    "type": "page",
+    "patterns": [],
+    "iframe": false,
+    "headers": {},
+    "proxy": false
+  },
+  "pagination": {
+    "enabled": true,
+    "page_param": "page",
+    "count_selector": "",
+    "fallback": 1
+  },
+  "samples": {
+    "list_count": 24,
+    "detail_id": "1",
+    "source_count": 2,
+    "episode_count": 12
+  },
+  "rendering": "html"
+}

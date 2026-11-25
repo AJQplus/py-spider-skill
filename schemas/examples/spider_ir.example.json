@@ -1,0 +1,67 @@
+{
+  "request": {
+    "method": "GET",
+    "url_templates": {
+      "home": "/",
+      "category": "/search.php?searchtype=5&tid={tid}&page={pg}"
+    },
+    "headers": {
+      "User-Agent": "Mozilla/5.0"
+    }
+  },
+  "list": {
+    "source": "html",
+    "selectors_or_paths": [
+      "//a[contains(@class,'videopic')]"
+    ],
+    "id_rule": "index",
+    "name_rule": "title",
+    "pic_rule": "data-original"
+  },
+  "detail": {
+    "url_template": "/movie/index{id}.html",
+    "fields": {},
+    "source_rule": "panel",
+    "episode_rule": "playlistlink"
+  },
+  "search": {
+    "method": "POST",
+    "url_template": "/search.php",
+    "data": {
+      "searchword": "{key}"
+    }
+  },
+  "player": {
+    "type": "page",
+    "patterns": [
+      "var now"
+    ],
+    "headers": {}
+  },
+  "pagination": {
+    "page_param": "page",
+    "pagecount_rule": "",
+    "total_rule": ""
+  },
+  "special": {
+    "token": false,
+    "decode": "",
+    "proxy": false,
+    "context_queue": false,
+    "line_model": {
+      "sid": "",
+      "from": "",
+      "show": "",
+      "media": "",
+      "order": "observed"
+    },
+    "media_probe": {
+      "status_codes": [
+        200
+      ],
+      "content_type": "",
+      "magic_bytes": true,
+      "playlist_tag": "#EXTM3U"
+    }
+  }
+}

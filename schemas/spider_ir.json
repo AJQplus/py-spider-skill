@@ -1,0 +1,343 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spider_ir.schema.json",
+  "title": "Spider Implementation IR",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request",
+    "list",
+    "detail",
+    "search",
+    "player",
+    "pagination",
+    "special"
+  ],
+  "properties": {
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "url_templates",
+        "headers"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "GET",
+            "POST",
+            "MIXED"
+          ]
+        },
+        "url_templates": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "envelope": {
+          "type": "string"
+        },
+        "cipher": {
+          "type": "string"
+        }
+      }
+    },
+    "list": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "selectors_or_paths",
+        "id_rule",
+        "name_rule",
+        "pic_rule"
+      ],
+      "properties": {
+        "source": {
+          "enum": [
+            "html",
+            "json",
+            "nuxt",
+            "mixed"
+          ]
+        },
+        "selectors_or_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "id_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pic_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url_template",
+        "fields",
+        "source_rule",
+        "episode_rule"
+      ],
+      "properties": {
+        "url_template": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fields": {
+          "type": "object"
+        },
+        "source_rule": {
+          "type": "string"
+        },
+        "episode_rule": {
+          "type": "string"
+        }
+      }
+    },
+    "search": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "url_template",
+        "data"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        },
+        "url_template": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    },
+    "player": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "patterns",
+        "headers"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "direct",
+            "page",
+            "iframe",
+            "api",
+            "mixed"
+          ]
+        },
+        "patterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "realtime_resolve": {
+          "type": "boolean"
+        },
+        "media_gate": {
+          "type": "string"
+        }
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "page_param",
+        "pagecount_rule",
+        "total_rule"
+      ],
+      "properties": {
+        "page_param": {
+          "type": "string"
+        },
+        "pagecount_rule": {
+          "type": "string"
+        },
+        "total_rule": {
+          "type": "string"
+        }
+      }
+    },
+    "special": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "token",
+        "decode",
+        "proxy",
+        "context_queue"
+      ],
+      "properties": {
+        "token": {
+          "type": "boolean"
+        },
+        "decode": {
+          "type": "string"
+        },
+        "proxy": {
+          "type": "boolean"
+        },
+        "context_queue": {
+          "type": "boolean"
+        },
+        "rsc_flight": {
+          "type": "boolean"
+        },
+        "parameter_validation": {
+          "type": "string"
+        },
+        "module_dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "line_model": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "sid": {
+              "type": "string"
+            },
+            "from": {
+              "type": "string"
+            },
+            "show": {
+              "type": "string"
+            },
+            "media": {
+              "type": "string"
+            },
+            "order": {
+              "enum": [
+                "observed",
+                "numeric"
+              ]
+            }
+          }
+        },
+        "media_probe": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "status_codes": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "content_type": {
+              "type": "string"
+            },
+            "magic_bytes": {
+              "type": "boolean"
+            },
+            "playlist_tag": {
+              "type": "string"
+            }
+          }
+        },
+        "proxy_strategy": {
+          "type": "string"
+        },
+        "folder_strategy": {
+          "type": "string"
+        },
+        "queue_strategy": {
+          "type": "string"
+        },
+        "hls_strategy": {
+          "type": "string"
+        },
+        "image_decrypt": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cipher": {
+              "type": "string"
+            },
+            "key": {
+              "type": "string"
+            },
+            "iv": {
+              "type": "string"
+            },
+            "mode": {
+              "type": "string"
+            },
+            "padding": {
+              "type": "string"
+            },
+            "proxy": {
+              "type": "boolean"
+            }
+          }
+        },
+        "api_error": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "error_codes": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "plain_error": {
+              "type": "boolean"
+            },
+            "encrypted_ok": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  }
+}
